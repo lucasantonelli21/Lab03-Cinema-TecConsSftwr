@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/pages.css">
+    <script type="module" src="/js/venda-ingressos.js"></script>
+    <title>Cinema</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index.html"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cadastro-filmes.html">Filmes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cadastro-salas.html">Salas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cadastro-sessoes.html">Sessões</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/venda-ingressos.html">Ingressos</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-header text-center">
+          <h1 class="mt-5">Compre seu Ingresso</h1>
+        </div>
+
+        <form id="ingressoForm" class="mt-4">
+
+          <div class="card-body">
+
+            <div class="mb-3">
+              <label for="sessao" class="form-label">Sessão</label>
+              <select name="sessao" id="sessao" class="form-control">
+                <option value="">Selecione a sua Sessão</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="cpf" class="form-label">Cpf</label>
+              <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" name="cpf" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="assento" class="form-label">Assento</label>
+              <input type="text" class="form-control" id="assento" name="assento" placeholder="Ex: A10" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="pagamento" class="form-label">Forma de Pagamento</label>
+              <select name="pagamento" id="pagamento" class="form-control">
+                <option value="">Selecione a forma de Pagamento</option>
+                <option value="cartao">Cartão</option>
+                <option value="pix">Pix</option>
+                <option value="dinheiro">Dinheiro</option>
+              </select>
+            </div>
+
+
+
+          </div>
+
+          <div class="card-footer text-end">
+            <button type="submit" class="btn btn-success">Comprar Ingresso</button>
+          </div>
+
+        </form>
+      </div>
+      
+    </div>
+  </body>
+</html>

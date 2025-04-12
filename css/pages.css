@@ -1,0 +1,71 @@
+.form-label{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.title{
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+nav{
+    margin-bottom: 1rem;
+}
+
+.session-card {
+    width: 22%;
+    min-width: 250px;
+    margin: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.session-card img {
+    max-height: 250px;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.img-thumbnail {
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.card-text{
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Responsividade */
+@media screen and (max-width: 1199px) {
+    .session-card {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .session-card {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    .session-card {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
