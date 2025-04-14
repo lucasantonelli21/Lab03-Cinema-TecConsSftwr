@@ -56,38 +56,69 @@ function formatarCPF(e) {
 // Carrega todas as sessões disponíveis para o select
 function carregarSessoes() {
     const sessaoSelect = document.getElementById('sessao');
-    const sessoes = Sessao.getAll();
     
-    // Filtrar apenas sessões futuras
-    const agora = new Date();
-    const sessoesValidas = sessoes.filter(sessao => {
-        const dataHoraSessao = new Date(sessao.dataHora);
-        return dataHoraSessao > agora;
-    });
+    if (!sessaoSelect) {
+        console.error('Elemento select de sessões não encontrado');
+        return;
+    }
     
-    // Ordenar por data/hora (mais próximas primeiro)
-    sessoesValidas.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
-    
-    // Limpar opções existentes
-    sessaoSelect.innerHTML = '<option value="">Selecione a sua Sessão</option>';
-    
-    // Adicionar sessões ao select
-    sessoesValidas.forEach(sessao => {
-        const filme = Filme.getById(sessao.idFilme);
-        const sala = Sala.getById(sessao.idSala);
+    try {
+        // Obter todas as sessões do localStorage
+        const sessoes = Sessao.getAll();
         
-        if (!filme || !sala) return;
+        console.log('Total de sessões encontradas:', sessoes.length);
         
-        // Formatar data e hora para exibição
-        const dataHora = new Date(sessao.dataHora);
-        const dataFormatada = dataHora.toLocaleDateString('pt-BR');
-        const horaFormatada = dataHora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        // Filtrar apenas sessões futuras
+        const agora = new Date();
+        const sessoesValidas = sessoes.filter(sessao => {
+            if (!sessao || !sessao.dataHora) return false;
+            
+            const dataHoraSessao = new Date(sessao.dataHora);
+            return dataHoraSessao > agora;
+        });
         
-        const option = document.createElement('option');
-        option.value = sessao.id;
-        option.textContent = `${filme.titulo} - Sala ${sala.numero} - ${dataFormatada} ${horaFormatada} - ${sessao.formato} (${sessao.idioma})`;
-        sessaoSelect.appendChild(option);
-    });
+        console.log('Sessões futuras válidas:', sessoesValidas.length);
+        
+        // Ordenar por data/hora (mais próximas primeiro)
+        sessoesValidas.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
+        
+        // Limpar opções existentes
+        sessaoSelect.innerHTML = '<option value="">Selecione a sua Sessão</option>';
+        
+        // Adicionar sessões ao select
+        sessoesValidas.forEach(sessao => {
+            try {
+                const filme = Filme.getById(sessao.idFilme);
+                const sala = Sala.getById(sessao.idSala);
+                
+                if (!filme) {
+                    console.warn(`Filme não encontrado para a sessão ${sessao.id}`);
+                    return;
+                }
+                
+                if (!sala) {
+                    console.warn(`Sala não encontrada para a sessão ${sessao.id}`);
+                    return;
+                }
+                
+                // Formatar data e hora para exibição
+                const dataHora = new Date(sessao.dataHora);
+                const dataFormatada = dataHora.toLocaleDateString('pt-BR');
+                const horaFormatada = dataHora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                
+                const option = document.createElement('option');
+                option.value = sessao.id;
+                option.textContent = `${filme.titulo} - Sala ${sala.numero} - ${dataFormatada} ${horaFormatada} - ${sessao.formato} (${sessao.idioma})`;
+                sessaoSelect.appendChild(option);
+            } catch (err) {
+                console.error(`Erro ao processar sessão ${sessao?.id}:`, err);
+            }
+        });
+        
+        console.log('Opções de sessões adicionadas:', sessaoSelect.options.length - 1);
+    } catch (error) {
+        console.error('Erro ao carregar sessões:', error);
+    }
 }
 
 function handleIngressoSubmit(event) {

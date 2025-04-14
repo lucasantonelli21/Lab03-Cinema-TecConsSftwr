@@ -19,11 +19,27 @@ function carregarSessoes() {
         return;
     }
     
-    // Ordenar sessões por data/hora (mais recentes primeiro)
-    sessoes.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
+    // Filtrar apenas sessões futuras
+    const agora = new Date();
+    const sessoesValidas = sessoes.filter(sessao => {
+        if (!sessao || !sessao.dataHora) return false;
+        const dataHoraSessao = new Date(sessao.dataHora);
+        return dataHoraSessao > agora;
+    });
+    
+    if (sessoesValidas.length === 0) {
+        // Se não houver sessões válidas, exibir mensagem
+        wrapper.innerHTML = '<div class="alert alert-info">Não há sessões disponíveis no momento.</div>';
+        return;
+    }
+    
+    // Ordenar sessões por data/hora (mais próximas primeiro)
+    sessoesValidas.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
+    
+    console.log(`Encontradas ${sessoesValidas.length} sessões válidas de um total de ${sessoes.length}`);
     
     // Processar cada sessão para exibição
-    sessoes.forEach(sessao => {
+    sessoesValidas.forEach(sessao => {
         const filme = Filme.getById(sessao.idFilme);
         const sala = Sala.getById(sessao.idSala);
         
